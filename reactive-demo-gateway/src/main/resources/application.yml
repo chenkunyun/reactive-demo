@@ -1,0 +1,19 @@
+server:
+  port: 5555
+
+spring:
+  application:
+    name: reactive-demo-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/

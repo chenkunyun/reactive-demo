@@ -1,0 +1,13 @@
+server:
+  port: 8769
+
+spring:
+  application:
+    name: reactive-demo-auth
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
