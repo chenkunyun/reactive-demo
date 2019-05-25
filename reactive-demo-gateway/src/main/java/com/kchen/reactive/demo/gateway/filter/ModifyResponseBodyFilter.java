@@ -12,7 +12,7 @@ import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
-import org.springframework.core.io.buffer.NettyDataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
@@ -59,9 +59,7 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
                         } catch (IOException e) {
                             // TODO: need catch?
                         }
-                        if (buffer instanceof NettyDataBuffer) {
-                            ((NettyDataBuffer) buffer).release();
-                        }
+                        DataBufferUtils.release(buffer);
                     });
 
                     GatewayResult gatewayResult = new GatewayResult();
