@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.HashMap;
 
 /**
@@ -23,6 +24,6 @@ public class AuthController {
         HashMap<String, String> map = new HashMap<>(1);
         map.put("timestamp", String.valueOf(System.currentTimeMillis()));
         data.setData(map);
-        return Mono.just(data);
+        return Mono.just(data).delayElement(Duration.ofMillis(5));
     }
 }

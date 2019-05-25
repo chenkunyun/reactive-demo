@@ -3,6 +3,7 @@ package com.kchen.reactive.demo.gateway.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kchen.reactive.demo.common.entity.ApiResult;
 import com.kchen.reactive.demo.gateway.entity.GatewayResult;
+import com.kchen.reactive.demo.gateway.exception.GatewayException;
 import com.kchen.reactive.demo.gateway.util.JsonUtils;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -11,6 +12,7 @@ import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.core.io.buffer.NettyDataBuffer;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
@@ -57,6 +59,9 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
                         } catch (IOException e) {
                             // TODO: need catch?
                         }
+                        if (buffer instanceof NettyDataBuffer) {
+                            ((NettyDataBuffer) buffer).release();
+                        }
                     });
 
                     GatewayResult gatewayResult = new GatewayResult();
@@ -88,7 +93,7 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
 
                     }
 
-                    return null;
+                    throw new GatewayException("error while parsing json");
                 }));
             }
         };
