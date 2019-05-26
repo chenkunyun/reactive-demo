@@ -36,6 +36,8 @@
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
+        <gatling-charts-highcharts.version>3.1.2</gatling-charts-highcharts.version>
+        <gatling-maven-plugin.version>3.0.2</gatling-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -81,6 +83,11 @@
                 <version>${commons-lang3.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.gatling.highcharts</groupId>
+                <artifactId>gatling-charts-highcharts</artifactId>
+                <version>${gatling-charts-highcharts.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -138,6 +145,12 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
                     <version>${findbugs-maven-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>io.gatling</groupId>
+                    <artifactId>gatling-maven-plugin</artifactId>
+                    <version>${gatling-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

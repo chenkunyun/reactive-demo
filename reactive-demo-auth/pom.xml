@@ -33,5 +33,25 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 测试脚本 -->
+                    <simulationClass>com.kchen.reactive.demo.auth.test.AuthSimulationTest</simulationClass>
+                    <!-- 结果输出地址 -->
+                    <resultsFolder>/Users/kchen/gatling/auth</resultsFolder>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
