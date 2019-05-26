@@ -36,5 +36,26 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 测试脚本 -->
+                    <simulationClass>com.kchen.reactive.demo.gateway.test.GatewaySimulationTest</simulationClass>
+                    <!-- 结果输出地址 -->
+                    <resultsFolder>/Users/kchen/gatling/reactive-gateway</resultsFolder>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
