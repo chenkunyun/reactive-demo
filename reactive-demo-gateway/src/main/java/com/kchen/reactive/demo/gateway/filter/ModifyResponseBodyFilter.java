@@ -13,6 +13,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
@@ -34,15 +35,15 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpResponse response = exchange.getResponse();
-//        if (!response.getHeaders().getContentType().includes(MediaType.APPLICATION_JSON)) {
-//            // 只修改json 返回
-//            return chain.filter(exchange);
-//        }
-
         DataBufferFactory dataBufferFactory = response.bufferFactory();
         ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(response) {
             @Override
             public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
+                if (!response.getHeaders().getContentType().includes(MediaType.APPLICATION_JSON)) {
+                    // 只修改json 返回
+                    return chain.filter(exchange);
+                }
+
                 if (!(body instanceof Flux)) {
                     return super.writeWith(body);
                 }
