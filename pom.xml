@@ -15,6 +15,7 @@
         <module>reactive-demo-common</module>
         <module>reactive-demo-eureka</module>
         <module>reactive-demo-raw</module>
+        <module>reactive-demo-redis</module>
     </modules>
 
     <properties>
@@ -22,8 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
 
         <guava.version>27.1-jre</guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
